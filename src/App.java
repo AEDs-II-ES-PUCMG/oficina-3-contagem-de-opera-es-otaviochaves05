@@ -34,13 +34,14 @@ public class App {
     static double nanoToMilli = 1.0/1_000_000;
 
     /**
-     * Código de teste 1. Este método...
+     * Código de teste 1. Este método somar os elementos pares de um vetor
      * @param vetor Vetor com dados para teste.
      * @return Uma resposta que significa....
      */
     static int codigo1(int[] vetor) {
         int resposta = 0;
         for (int i = 0; i < vetor.length; i += 2) {
+            operacoes++;
             resposta += vetor[i]%2;
         }
         return resposta;
@@ -55,6 +56,7 @@ public class App {
         int contador = 0;
         for (int k = (vetor.length - 1); k > 0; k /= 2) {
             for (int i = 0; i <= k; i++) {
+                operacoes++;
                 contador++;
             }
 
@@ -63,13 +65,14 @@ public class App {
     }
 
     /**
-     * Código de teste 3. Este método...
+     * Código de teste 3. Este método ordena um vetor pelo metodo de selecao
      * @param vetor Vetor com dados para teste.
      */
     static void codigo3(int[] vetor) {
         for (int i = 0; i < vetor.length - 1; i++) {
             int menor = i;
             for (int j = i + 1; j < vetor.length; j++) {
+                operacoes++;
                 if (vetor[j] < vetor[menor])
                     menor = j;
             }
@@ -80,11 +83,12 @@ public class App {
     }
 
     /**
-     * Código de teste 4 (recursivo). Este método...
+     * Código de teste 4 (recursivo). Este método retorna a sequencia fibonacci ate n
      * @param n Ponto inicial do algoritmo
      * @return Um inteiro que significa...
      */
     static int codigo4(int n) {
+        operacoes++;
         if (n <= 2)
             return 1;
         else
@@ -99,12 +103,20 @@ public class App {
     static int[] gerarVetor(int tamanho){
         int[] vetor = new int[tamanho];
         for (int i = 0; i < tamanho; i++) {
-            vetor[i] = aleatorio.nextInt(1, tamanho/2);
+            vetor[i] = aleatorio.nextInt(1, tamanho/2); 
         }
         return vetor;
         
     }
     public static void main(String[] args) {
-        
+        for (int i = 0; i < 5; i++) {
+            // int[] vetor = gerarVetor(tamanhosTestePequeno[i]);
+            operacoes = 0;
+            long inicio = System.nanoTime();
+            codigo4(tamanhosTestePequeno[i]);
+            long fim = System.nanoTime();
+            double tempo = (fim - inicio) * nanoToMilli;
+            System.out.println("Operacoes = " + operacoes + " , tempo: " + tempo + ".");
+        }
     }
 }
