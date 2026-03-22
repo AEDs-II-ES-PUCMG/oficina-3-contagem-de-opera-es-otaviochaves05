@@ -24,7 +24,7 @@
 **/replay_pid*
 
 # PDF from classes' notes
-**/*.pdf
+# **/*.pdf
 
 # DIA temporary files
 **/*.dia~
